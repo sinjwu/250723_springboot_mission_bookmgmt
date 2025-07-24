@@ -18,7 +18,7 @@
     <tr th:each="book: ${books}">
         <td th:text="${book.id}"></td>
         <td th:text="${book.title}"></td>
-        <td th:text="${#lists.find(authors, author->author.id==book.authorId)?.name}"></td>
+        <td th:text="${book.authorName}"></td>
         <td>
             <a th:href="@{/books/{id}/edit(id=${book.id})}">수정</a>
             <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post">
