@@ -15,7 +15,8 @@ public class BookController {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     @GetMapping
-    public String list() {
+    public String list(Model model) {
+        model.addAttribute("books", bookRepository.findAll());
         return "books";
     }
     @GetMapping("/books/new")
@@ -27,6 +28,18 @@ public class BookController {
     @PostMapping("/books")
     public String save(@ModelAttribute Book book) {
         bookRepository.save(book);
+        return "redirect:/";
+    }
+    @GetMapping("/books/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("book", bookRepository.findById(id));
+        model.addAttribute("authors", authorRepository.finalAll());
+        return "book_form";
+    }
+    @PostMapping("/books/{id}/edit")
+    public String update(@PathVariable Long id, @ModelAttribute Book book) {
+        book.setId(id);
+        bookRepository.update(book);
         return "redirect:/";
     }
     @PostMapping("/books/{id}/delete")
