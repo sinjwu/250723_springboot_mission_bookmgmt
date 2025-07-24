@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h1>저자 목록</h1>
+<a th:href="@{/authors/new}">새 저자 추가</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="author: ${authors}">
+        <td th:text="${author.id}"></td>
+        <td th:text="${author.name}"></td>
+        <td>
+            <a th:href="@{/authors/{id}/edit(id=${author.id})}">수정</a>
+            <form th:action="@{/boos/{id}/delete(id=${author.id})}" method="post">
+                <button type="submit">삭제</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

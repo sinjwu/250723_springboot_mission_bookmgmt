@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Form</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h1 th:text="${book.id}==null ? '새 책' : '책 수정'"></h1>
+<form th:action="${book.id}==null ? @{/books} : @{/books/{id}/edit(id=${book.id})}" method="post" th:object="${book}">
+  <label>Name:</label>
+  <input type="text" th:field="*{title}" />
+  <label>Author:</label>
+  <select name="authorId">
+    <option th:each="author: ${authors}" th:value="${author.id}" th:text="${author.name}" th:selectd="${author.id==book.authorId}" ></option>
+  </select>
+  <input type="date" name="publishedDate" th:value="${book.publishedDate}" />
+  <button type="submit">저장</button>
+</form>
+</body>
+</html>
