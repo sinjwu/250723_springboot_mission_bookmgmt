@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Book Form</title>
-  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body>
 <h1 th:text="${book.id}==null ? '새 책' : '책 수정'"></h1>
+<a th:href="@{/}">책 목록</a>
 <form th:action="${book.id}==null ? @{/books} : @{/books/{id}/edit(id=${book.id})}" method="post" th:object="${book}">
   <label>Name:</label>
   <input type="text" th:field="*{title}" />
